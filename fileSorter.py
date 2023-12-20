@@ -62,19 +62,19 @@ elif sys.argv[1] == 'Documents':
             if len(split) < 3:
                 continue
 
-            property = split[0]
+            category1 = split[0]
+            category2 = split[1]
 
             # Create a new directory for Category1 if it doesn't exist, add it to known directories
-            if property not in directories:
-                os.mkdir(target + '/' + property)
-                directories[property] = property
-            type = split[1]
+            if category1 not in directories:
+                os.mkdir(target + '/' + category1)
+                directories[category1] = category1
 
             # Create a new directory for Category2 if it doesn't exist, add it to known directories
-            if property + '/' + type not in directories:
-                os.mkdir(target + '/' + property + '/' + type)
-                directories[property + '/' + type] = property + '/' + type
+            if category1 + '/' + category2 not in directories:
+                os.mkdir(target + '/' + category1 + '/' + category2)
+                directories[category1 + '/' + category2] = category1 + '/' + category2
 
             # Move the file to the correct directory
-            os.rename(target + '/' + file, target + '/' + property + '/' + type + '/' + split[2])
+            os.rename(target + '/' + file, target + '/' + category1 + '/' + category2 + '/' + split[2])
         
