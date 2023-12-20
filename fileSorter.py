@@ -2,18 +2,18 @@ import os
 import sys
 
 if len(sys.argv) != 3:
-    print("Incorrect Arguments Provided, use: python fileSorter.py sortType opt:targetDirectory")
+    print("Incorrect Arguments Provided, use: python fileSorter.py sortType targetDirectory")
     exit()
     
 if (sys.argv[1] != "default" and sys.argv[1] != 'Documents'):
-    print("Invalid Arguments Provided, use: python fileSorter.py sortType opt:targetDirectory")
+    print("Invalid Arguments Provided, use: python fileSorter.py sortType targetDirectory")
     exit()
 
 if sys.argv[1] == "default":
     # Validate given argument is an existing directory
     target = sys.argv[2]
     if not os.path.isdir(target):
-        print("Invalid Directory Provided, use: python fileSorter.py targetDirectory")
+        print("Invalid Directory Provided, use: python fileSorter.py sortType targetDirectory")
         exit()
 
     directories = { }
@@ -42,6 +42,9 @@ if sys.argv[1] == "default":
 # When using Documents sorting, the files should be named as follows: Category 1-Category 2-File Name.filetype
 elif sys.argv[1] == 'Documents':
     target = os.path.expanduser('~') + '/Documents/' + sys.argv[2]
+    if not os.path.isdir(target):
+        print("Provided directory does not exist in ~/Documents")
+        exit()
 
     directories = { }
     # Create a list of all directories in the target directory
@@ -61,13 +64,13 @@ elif sys.argv[1] == 'Documents':
 
             property = split[0]
 
-            # Create a new directory for this property if it doesn't exist, add it to known directories
+            # Create a new directory for Category1 if it doesn't exist, add it to known directories
             if property not in directories:
                 os.mkdir(target + '/' + property)
                 directories[property] = property
             type = split[1]
 
-            # Check if this file type for this property exists, make a new directory if it doesn't
+            # Create a new directory for Category2 if it doesn't exist, add it to known directories
             if property + '/' + type not in directories:
                 os.mkdir(target + '/' + property + '/' + type)
                 directories[property + '/' + type] = property + '/' + type
