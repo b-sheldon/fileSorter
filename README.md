@@ -7,7 +7,7 @@ A python script to sort files into directories based on their file type
 ### 1. default
 #### Use: python fileSorter.py default path/to/target/directory
 
-The default flag will sort the files provided in the target directory into new directories based on their file type (pdf, txt, py, png, etc.).
+The default flag will sort the files provided in the target directory (provide the relative/absolute path) into new directories based on their file type (pdf, txt, py, png, etc.).
 
 ### 2. Documents
 #### Use: python fileSorter.py Documents TargetDirectory
